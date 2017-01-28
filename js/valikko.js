@@ -1,10 +1,17 @@
 $(function(){
+	// dropdown script
 	$(".dropdown-menu li a").click(function(){
 	  var valittu = $(this).text();
 	  $(this).parents('.btn-group').find('.dropdown-toggle').html(valittu+' <span class="caret"></span>');
 	});
-
+	
+	//datepicker script
+	$('#datetimepicker').datetimepicker({
+		format: 'DD.MM.YYYY'
+	});
+	
+	//etsi-napin script
 	$("#btnSearch").click(function(){
-		alert($('.btn-select').text()+", "+$('.btn-select2').text());
+		alert($('#dropTeatteri').text()+", "+$('#datetimepicker').text());
 	});
 });

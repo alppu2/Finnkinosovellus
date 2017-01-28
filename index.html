@@ -1,48 +1,69 @@
 <!DOCTYPE html>
-<html ng-app>
+<html ng-app="Finnkinosovellus">
 <head>
 	<meta charset="utf-8">
-	<script src="http://code.jquery.com/jquery-1.8.2.min.js"></script>
+
+	<!-- ladataan jquery, moment(kalenteriin), kalenteri, angular ja bootstrappi -->
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+	<script type="text/javascript" src="bower_components/moment/min/moment.min.js"></script>
 	<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.1/angular.min.js"></script>
 	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-	<script src="http://code.jquery.com/jquery-1.8.2.min.js"></script>
-	<script src="js/dropdown.js"></script>
-	<script src="js/datepicker.js"></script>
+	<script type="text/javascript" src="bower_components/eonasdan-bootstrap-datetimepicker/build/js/bootstrap-datetimepicker.min.js"></script>
+	<!-- <script src="http://code.jquery.com/jquery-1.8.2.min.js"></script> -->
 	
+	<!-- valikkopalkin ja xml -> JSON kääntäjän scriptit -->
+	<script src="js/valikko.js"></script>
+	<script src="x2js/xml2json.js"></script>
+	<script src="x2js/converter.js"></script>
+	
+	<!-- vähän tyyliä sivulle ja komponenteille -->
 	<link href="css/bootstrap.min.css" rel="stylesheet">
-	<link href="css/stickyfooter.css" rel="stylesheet">
-	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<!-- <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.6.4/css/bootstrap-datepicker.css" rel="stylesheet"> -->
+	<meta name="viewport" content="width=device-width, initial-scale=2">
+	<link rel="stylesheet" href="bower_components/eonasdan-bootstrap-datetimepicker/build/css/bootstrap-datetimepicker.min.css" />
+	
 </head>
 <body>
 	<div class="container">
-		<h1>Finnkinosovellus</h1>
+		<h1>Finnkino-sovellus</h1>
+		<div class="row">
 		
-		<!--  päävalikko baari  -->
-		  <div class="well">
-		  
-			<!-- teatterin valinta -->
-			<div class="btn-group">
-			  <a class="btn dropdown-toggle btn-select" data-toggle="dropdown" href="#">Valitse teatteri <span class="caret"></span></a>
-			  <ul class="dropdown-menu">
-				<li><a href="#">Item I</a></li>
-				<li><a href="#">Item II</a></li>
-				<li><a href="#">Item III</a></li>
-			  </ul>
-			</div>
+			<!--  päävalikko baari  -->
+			<div class="well">
 			
-			<!-- datepicker -->
-			<div class="input-group date" data-provider="datepicker">
-			<input type="text" class="form-control">
-			<div class="input-group-addon">
-				<span class="glyphicon glyphicon-th"></span>
+				<!-- teatterin valinta -->
+				<div class="btn-group col-lg-2" ng-controller="AppController">
+					<a class="btn dropdown-toggle btn-warning" id="dropTeatteri" data-toggle="dropdown" href="#">Valitse teatteri <span class="caret"></span></a>
+					<ul class="dropdown-menu">
+					    <li ng-repeat="TheatreArea in dataSet">
+						    <div>
+								<p>{{TheatreArea.Name}}</p>
+							    <!-- <h2>{{guitar.make}} {{guitar.model}}</h2>
+							    <h3>First sold in {{guitar.introyear}}</h3>
+							    <img ng-src="{{IMAGE_LOCATION + guitar.image}}" />
+							    <p>{{guitar.desc}}</p>
+							    <a href="{{guitar.link}}" target="_blank">More info about the {{guitar.model}}...</a> -->
+							</div>
+						</li>
+					<!-- <li><a href="#">Item I</a></li>
+					<li><a href="#">Item II</a></li>
+					<li><a href="#">pitkä vaihtoehto</a></li> -->
+					</ul>
+				</div>
+				
+				<!-- datepicker -->
+				<div class="input-group date col-lg-2" id="datetimepicker">
+					<input type="text" class="form-control" />
+					<span class="input-group-addon">
+						<span class="glyphicon glyphicon-calendar"></span>
+				</div>
+				
+				<!-- etsi nappi -->
+				<div class="btn-group col-lg-1">
+					  <button type="button" id="btnSearch" class="btn btn-primary">Etsi</button>
+				</div>
 			</div>
-			
-			<div class="btn-group">
-			  <button type="button" id="btnSearch" class="btn btn-primary">Etsi</button>
-			</div>
-		  </div>
-		
+		</div>
 	</div>
 </body>
 </html>
