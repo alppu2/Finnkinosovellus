@@ -9,12 +9,11 @@ app.controller('AppController', function ($scope, $http) {
 	})
     .then(function success(data) {
 		console.log(data);
-		$scope.dataSet = data.data.TheatreAreas.TheatreArea;
+		$scope.dataSetTheatres = data.data.TheatreAreas.TheatreArea;
 	}, function(error) {
-		console.log("virhe");
+		console.log("error theatres");
 	});
 });
-
 
 
 

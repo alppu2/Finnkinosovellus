@@ -1,69 +1,67 @@
 <!DOCTYPE html>
-<html ng-app="Finnkinosovellus">
+<html>
 <head>
 	<meta charset="utf-8">
 
-	<!-- ladataan jquery, moment(kalenteriin), kalenteri, angular ja bootstrappi -->
+	<!-- ladataan jquery, moment(kalenteriin), datepicker(kalenteri), angular ja bootstrappi -->
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
 	<script type="text/javascript" src="bower_components/moment/min/moment.min.js"></script>
 	<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.1/angular.min.js"></script>
 	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 	<script type="text/javascript" src="bower_components/eonasdan-bootstrap-datetimepicker/build/js/bootstrap-datetimepicker.min.js"></script>
-	<!-- <script src="http://code.jquery.com/jquery-1.8.2.min.js"></script> -->
+	
+	<!-- select valikon (teatterin valinta) -->
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.12.1/css/bootstrap-select.min.css">
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.12.1/js/bootstrap-select.min.js"></script>
 	
 	<!-- valikkopalkin ja xml -> JSON kääntäjän scriptit -->
-	<script src="js/valikko.js"></script>
 	<script src="x2js/xml2json.js"></script>
-	<script src="x2js/converter.js"></script>
+	<script src="x2js/converterSchedule.js"></script>
 	
 	<!-- vähän tyyliä sivulle ja komponenteille -->
 	<link href="css/bootstrap.min.css" rel="stylesheet">
-	<!-- <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.6.4/css/bootstrap-datepicker.css" rel="stylesheet"> -->
 	<meta name="viewport" content="width=device-width, initial-scale=2">
 	<link rel="stylesheet" href="bower_components/eonasdan-bootstrap-datetimepicker/build/css/bootstrap-datetimepicker.min.css" />
 	
 </head>
 <body>
-	<div class="container">
+	<div class="container" ng-app="Finnkinosovellus" ng-controller="ScheduleController">
 		<h1>Finnkino-sovellus</h1>
-		<div class="row">
+		<div class="well">
 		
 			<!--  päävalikko baari  -->
-			<div class="well">
+			<div class="row">
 			
 				<!-- teatterin valinta -->
-				<div class="btn-group col-lg-2" ng-controller="AppController">
-					<a class="btn dropdown-toggle btn-warning" id="dropTeatteri" data-toggle="dropdown" href="#">Valitse teatteri <span class="caret"></span></a>
+				<div class="col-sm-2" >
+					<a class="btn dropdown-toggle btn-warning" id="dropTeatteri" data-toggle="dropdown" href="#">{{current.Name}} <span class="caret"></span></a>
 					<ul class="dropdown-menu">
-					    <li ng-repeat="TheatreArea in dataSet">
-						    <div>
-								<p>{{TheatreArea.Name}}</p>
-							    <!-- <h2>{{guitar.make}} {{guitar.model}}</h2>
-							    <h3>First sold in {{guitar.introyear}}</h3>
-							    <img ng-src="{{IMAGE_LOCATION + guitar.image}}" />
-							    <p>{{guitar.desc}}</p>
-							    <a href="{{guitar.link}}" target="_blank">More info about the {{guitar.model}}...</a> -->
-							</div>
+						<li ng-repeat="t in theatreareas" ng-click="select(t)">
+							<a href="#">{{t.Name}}</a>
 						</li>
-					<!-- <li><a href="#">Item I</a></li>
-					<li><a href="#">Item II</a></li>
-					<li><a href="#">pitkä vaihtoehto</a></li> -->
 					</ul>
 				</div>
 				
 				<!-- datepicker -->
-				<div class="input-group date col-lg-2" id="datetimepicker">
-					<input type="text" class="form-control" />
-					<span class="input-group-addon">
-						<span class="glyphicon glyphicon-calendar"></span>
+				<div class="col-sm-3">
+					<div class="input-group date" id="datetimepicker">
+						<input type="text" class="form-control" />
+						<span class="input-group-addon">
+							<span class="glyphicon glyphicon-calendar"></span>
+					</div>
 				</div>
 				
 				<!-- etsi nappi -->
-				<div class="btn-group col-lg-1">
-					  <button type="button" id="btnSearch" class="btn btn-primary">Etsi</button>
+				<div class="col-sm-2">
+					<button type="button" id="btnSearch" class="btn btn-warning" ng-click="search()">Etsi</button>
 				</div>
 			</div>
 		</div>
+		
+		<!-- lista -->
+		<ul class="list-group">
+			<li class="list-group-item" ng-repeat="Show in dataSetSchedule">{{Show.Title}}</li>
+		</ul>
 	</div>
 </body>
 </html>
