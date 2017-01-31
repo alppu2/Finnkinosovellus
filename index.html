@@ -10,13 +10,9 @@
 	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 	<script type="text/javascript" src="bower_components/eonasdan-bootstrap-datetimepicker/build/js/bootstrap-datetimepicker.min.js"></script>
 	
-	<!-- select valikon (teatterin valinta) -->
-	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.12.1/css/bootstrap-select.min.css">
-	<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.12.1/js/bootstrap-select.min.js"></script>
-	
-	<!-- valikkopalkin ja xml -> JSON kääntäjän scriptit -->
+	<!-- omat ja xml -> JSON kääntäjän scriptit -->
 	<script src="x2js/xml2json.js"></script>
-	<script src="x2js/converterSchedule.js"></script>
+	<script src="js/angularScripts.js"></script>
 	
 	<!-- vähän tyyliä sivulle ja komponenteille -->
 	<link href="css/bootstrap.min.css" rel="stylesheet">
@@ -58,9 +54,14 @@
 			</div>
 		</div>
 		
-		<!-- lista -->
+		<!-- lista elokuvista -->
 		<ul class="list-group">
-			<li class="list-group-item" ng-repeat="Show in dataSetSchedule">{{Show.Title}}</li>
+			<li class="list-group-item" ng-repeat="Show in dataSetSchedule">
+				<p><b>{{Show.Title}}</b></p>
+				<p>Alkaa: {{Show.dttmShowStart | date:'HH:mm'}}</p>
+				<p>Kesto: {{Show.LengthInMinutes}} minuuttia | Ikäraja: {{Show.Rating}}</p>
+				<p>{{Show.TheatreAndAuditorium}} | Genre: {{Show.Genres}}</p>
+			</li>
 		</ul>
 	</div>
 </body>

@@ -1,7 +1,7 @@
 $(function(){
 	//datepicker scripti
 	$('#datetimepicker').datetimepicker({
-		format: 'D.M.YYYY'
+		format: 'DD.MM.YYYY'
 	});
 });
 
@@ -38,7 +38,7 @@ app.controller('ScheduleController', function ($scope, $http) {
 		$scope.current = value;
 	}
 
-	// funktio johon otetaan parametreina teatteri ja päivä
+	// search-funktio johon otetaan parametreina teatteri ja päivä
 	// ja leivotaan niistä URLI joka hakee esityslistan
 	function search(area, date) {
 		$http.get("http://www.finnkino.fi/xml/Schedule/?area=" + area + "&dt=" + date, {
